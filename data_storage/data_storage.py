@@ -5,9 +5,7 @@ from threading import RLock
 import pandas as pd
 
 
-# ==========================================
 # DATASET STATE
-# ==========================================
 
 @dataclass
 class DatasetState:
@@ -25,9 +23,7 @@ class DatasetState:
     version: int = 0
 
 
-# ==========================================
 # DATASET STORAGE
-# ==========================================
 
 datasets: dict[str, DatasetState] = {}
 
@@ -36,9 +32,7 @@ storage_lock = RLock()
 MAX_HISTORY = 10
 
 
-# ==========================================
 # 1. STORE DATASET
-# ==========================================
 
 def store_dataset(df: pd.DataFrame) -> str:
 
@@ -57,9 +51,7 @@ def store_dataset(df: pd.DataFrame) -> str:
     return dataset_id
 
 
-# ==========================================
 # 2. GET WORKING DATASET
-# ==========================================
 
 def get_dataset(dataset_id: str) -> pd.DataFrame:
 
@@ -72,9 +64,7 @@ def get_dataset(dataset_id: str) -> pd.DataFrame:
         return datasets[dataset_id].working_df.copy(deep=True)
 
 
-# ==========================================
 # 3. GET ORIGINAL DATASET
-# ==========================================
 
 def get_original_dataset(dataset_id: str) -> pd.DataFrame:
 
@@ -87,9 +77,7 @@ def get_original_dataset(dataset_id: str) -> pd.DataFrame:
         return datasets[dataset_id].original_df.copy(deep=True)
 
 
-# ==========================================
 # 4. UPDATE WORKING DATASET
-# ==========================================
 
 def update_dataset(
     dataset_id: str,
